@@ -1,18 +1,65 @@
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import { Carousel, Container, Row } from "react-bootstrap";
+import { GlobalContext } from "../../context/Globalcontext";
 import './frontpage.css';
 
+
 const Frontpage = () => {
-	return (
-		<>
+	const {setIsLoading} = useContext(GlobalContext);
+	const [homeContent,setHomeContent] = useState(false);
+	const [topCarousel,setTopCarousel] = useState(false)
+
+
+	useEffect(()=>{
+		axios.get(process.env.REACT_APP_WP_URL_JSON+'wp/v2/pages/193')
+		.then((response)=>{
+			//console.log(response.data);
+			setHomeContent(response.data)
+		})
+		.catch((error)=>{
+			console.log(error);
+			alert('Something went wrong');
+		})
+	},[])
+
+	useEffect(()=>{
+		if(homeContent){
+			console.log(homeContent.acf.main_banner_carousel);
+			setTopCarousel(homeContent.acf.main_banner_carousel)
+		}
+	},[homeContent])
+
+	const TopBannerSlider = () =>{
+		return(
 			<Carousel as="section">
+			{topCarousel.map(banner=>{
+				return (
 				<Carousel.Item>
-					<img className="d-block w-100" src="assets/images/banner3.jpg" alt="First slide" />
+					<img className="d-block w-100" src={banner.imgae.url} alt="Second slide" />
+
 					<Carousel.Caption>
-						<h3>First slide label</h3>
-						<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+						{banner.caption_title && <h2 className="text-white">{banner.caption_title}</h2>}
+						<div dangerouslySetInnerHTML={{ __html: banner.caption_blurb }} />
 					</Carousel.Caption>
 				</Carousel.Item>
-				<Carousel.Item>
+				)
+			})}
+			
+			</Carousel>
+		)
+	}
+
+
+
+	return (
+		<>
+			{topCarousel && <TopBannerSlider />}
+			{/*
+			<Carousel as="section">
+				
+				
+				 <Carousel.Item>
 					<img className="d-block w-100" src="assets/images/banner3.jpg" alt="Second slide" />
 
 					<Carousel.Caption>
@@ -29,6 +76,7 @@ const Frontpage = () => {
 					</Carousel.Caption>
 				</Carousel.Item>
 			</Carousel>
+			 */}
 
 			{/* what we offer */}
 			<Container fluid as="section" className="container-fluid whatWeOfferSec bgNoRepeat bgCover pt90 pb50">

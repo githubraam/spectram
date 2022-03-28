@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+import { Container, Nav, Navbar, NavDropdown, } from "react-bootstrap";
 import axios from "axios";
-
+import { GlobalContext } from "../context/Globalcontext";
 import './header.css';
+import { Link } from "react-router-dom";
+
 const Header = () => {
 	let headeroffset = '0';
 	const [isSticky, setIsSticky] = useState(false);
 	const [currentOffset, setCurrentOffset] = useState(0);
 	const [topneagative, settopneagative] = useState(headeroffset);
 	const [menuitem, setmenuitem] = useState({});
+	const {isLoading, setIsLoading} = useContext(GlobalContext);
 
 	let topHeaderHeight;
 
@@ -24,16 +27,22 @@ const Header = () => {
 
 
 	useEffect(()=>{
+		
 		window.addEventListener("scroll", scrollEvent);
-		axios.get(process.env.REACT_APP_WP_URL_JSON+'wp/v2/main-menu')
+
+		axios.get(process.env.REACT_APP_WP_URL_JSON+'wp/v2/menu')
 		.then((response)=>{
-			//console.log(response.data);
+
 			setmenuitem(response.data);
+			setIsLoading(false)
 
 		})
 		.catch((error)=>{
 			console.log(error);
+			alert('Please make sure that WP is running');
 		})
+
+
 	},[])
 
 	const scrollEvent = () =>{
@@ -57,7 +66,7 @@ const Header = () => {
 			</Container>
 			<Container>
 				<Navbar expand="lg">
-					<Navbar.Brand href="#home">
+					<Navbar.Brand  as={Link} to="/" >
 						<img src="assets/images/logo.png" className="img-fluid custom-logo" alt="" />
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -66,24 +75,24 @@ const Header = () => {
 							{menuitem.length ? 
 								menuitem.map((menu)=>{
 									return (<li className="menu-item" key={menu.ID}>
-										<Nav.Link href={menu.url.replace(process.env.REACT_APP_WP_SITE,'')}>{menu.title}</Nav.Link>
+										<Nav.Link as={Link} to={menu.url.replace(process.env.REACT_APP_WP_SITE,'')}>{menu.title}</Nav.Link>
 									</li>)
 								})
-							 : '' }
+							 : '' } 
 							{/* <li className="menu-item">
-								<Nav.Link href="#home">Home</Nav.Link>
+								<Nav.Link as={Link} to="/">Home</Nav.Link>
 							</li>
 							<li className="menu-item">
-								<Nav.Link href="#link">Lab</Nav.Link>
+								<Nav.Link as={Link} to="/lab">Lab</Nav.Link>
 							</li>
 							<li className="menu-item">
-								<Nav.Link href="#link">Scan</Nav.Link>
+								<Nav.Link as={Link} to="/scan">Scan</Nav.Link>
 							</li>
 							<li className="menu-item">
-								<Nav.Link href="#link">Film</Nav.Link>
+								<Nav.Link as={Link} to="/film">Film</Nav.Link>								
 							</li>
 							<li className="menu-item">
-								<Nav.Link href="#link">Cameras</Nav.Link>
+								<Nav.Link as={Link} to="/camera">Cameras</Nav.Link>
 							</li>
 							<li>
 								<NavDropdown title="Products" id="basic-nav-dropdown">
