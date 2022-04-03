@@ -15,3 +15,8 @@
 * useContext
 * Context.Provider
 * componentDidUpdate
+
+## Screenshot of WordPress Content
+
+![alt text](https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/main-menu.png)
+https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/main-menu.png
