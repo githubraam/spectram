@@ -91,7 +91,7 @@ const Frontpage = () => {
 					<Container>
 						<Row>
 						{homeContent.acf.service_section.map((service,index)=>
-						<div className="col-lg-3 col-md-6 mb-3">
+						<div className="col-lg-3 col-md-6 mb-3" key={index}>
 							<div className="boxWithImg" style={{backgroundColor:service.background_color}}>
 								<h3 className="text-center font24 weight500 text-white">{service.title}</h3>
 									<img src={service.image.url} alt={service.image.alt} className="thumb" />

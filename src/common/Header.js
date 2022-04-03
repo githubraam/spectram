@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Container, Nav, Navbar, NavDropdown, } from "react-bootstrap";
 import axios from "axios";
 import { GlobalContext } from "../context/Globalcontext";
@@ -11,9 +11,12 @@ const Header = () => {
 	const [currentOffset, setCurrentOffset] = useState(0);
 	const [topneagative, settopneagative] = useState(headeroffset);
 	const [menuitem, setmenuitem] = useState({});
-	const {isLoading, setIsLoading} = useContext(GlobalContext);
+	const {isLoading, setIsLoading, setHeaderHeight} = useContext(GlobalContext);
+	const headerRef = useRef(0)
 
 	let topHeaderHeight;
+
+
 
 	useEffect(()=>{
 		topHeaderHeight = document.querySelector('.topHeader').clientHeight + 'px';
@@ -27,6 +30,8 @@ const Header = () => {
 
 
 	useEffect(()=>{
+
+		setHeaderHeight(headerRef.current?.clientHeight);
 		
 		window.addEventListener("scroll", scrollEvent);
 
@@ -60,14 +65,14 @@ const Header = () => {
 		'top': topneagative,
 	}
 	return(
-		<Container as="header" fluid className={`p-0 header ${isSticky ? "fixedHeader" : ""}`} style={headerstyle} >
+		<Container as="header" fluid ref={headerRef} className={`p-0 header ${isSticky ? "fixedHeader" : ""}`} style={headerstyle} >
 			<Container fluid className="topHeader d-flex justify-content-end">
 				<Nav.Link href="#link" className="covid">Covid-19 info</Nav.Link>
 			</Container>
 			<Container>
 				<Navbar expand="lg">
 					<Navbar.Brand  as={Link} to="/" >
-						<img src="assets/images/logo.png" className="img-fluid custom-logo" alt="" />
+						<img src={'/assets/images/logo.png'} className="img-fluid custom-logo" alt="" />
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">

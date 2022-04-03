@@ -1,0 +1,79 @@
+.newAtSpectraSec {
+    z-index: 1;
+  }
+  .newAtSpectraSec .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+    opacity: 0.16;
+    z-index: -1;
+  }
+  
+  .videoEmbedWrpr .playBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+  
+  .iframeWrpr {
+    padding: 56.25% 0 0 0;
+    position: relative;
+  }
+  .iframeWrpr iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .highLightSection {
+    background-color: #252525;
+  }
+  
+  .haveOverlay {
+    position: relative;
+    z-index: 1;
+  }
+  .haveOverlay .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminosity;
+    opacity: 0.16;
+    z-index: -1;
+  }
+  
+  .contactCardWrpr {
+    gap: 25px;
+  }
+  
+  .contactCard {
+    min-width: 325px;
+    padding: 55px 25px 15px 25px;
+    border-radius: 4px;
+  }
+  .contactCard .iconWrpr {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background-color: inherit;
+  }
+  .contactCard a {
+    color: inherit;
+  }

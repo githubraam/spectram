@@ -15,9 +15,10 @@ import {
   } from "react-router-dom";
 function App() {
 	const [isLoading, setIsLoading] = useState(false);
+	const  [headerHeight, setHeaderHeight] = useState('0')
 	return (
 		<>
-		<GlobalContext.Provider value={{isLoading, setIsLoading}}>
+		<GlobalContext.Provider value={{isLoading, setIsLoading, headerHeight, setHeaderHeight}}>
 			<Router>
 			{isLoading && <Loading/>}
 			<Header />
