@@ -18,5 +18,14 @@
 
 ## Screenshot of WordPress Content
 
+### Main Menu
 ![alt text](https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/main-menu.png)
-https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/main-menu.png
+
+### Home Page
+![alt text](https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/home.png)
+
+### Lab 
+![alt text](https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/lab.png)
+
+### Scan
+![alt text](https://yellopals.com/headlesscms/wordpress/wp-content/uploads/2022/04/scan.png)
